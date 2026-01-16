@@ -119,7 +119,7 @@ class CkanExtend(ext.Extension):
                 break
         assert searchpath and current_path
         # get filename from full path
-        filename = template_path[len(searchpath) + 1:]
+        filename = template_path[len(searchpath) + 1:].replace(path.sep, '/')
 
         # Providing template path violently deprecated
         if parser.stream.current.type != 'block_end':
@@ -210,7 +210,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 lambda: True
             )
         # end of ckan changes
-        pieces = loaders.split_template_path(template)
+        pieces = loaders.split_template_path(template.replace('\\', '/'))
         for searchpath in searchpaths:
             filename = path.join(searchpath, *pieces)
             f = open_if_exists(filename)

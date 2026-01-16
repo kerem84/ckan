@@ -8,6 +8,8 @@ services:
     networks:
       - default
     image: "postgres:12"
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: ckan
       POSTGRES_PASSWORD: ckan
@@ -16,11 +18,15 @@ services:
     networks:
       - default
     image: "redis:7"
+    ports:
+      - "6379:6379"
 
   ckan-solr:
     networks:
       - default
     image: "ckan/ckan-solr:master"
+    ports:
+      - "8983:8983"
 
   ckan:
     image: python:3.10-bookworm
